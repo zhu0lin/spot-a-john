@@ -1,0 +1,30 @@
+/*About page*/
+a {
+    text-decoration: none;
+    color: black;
+  }
+
+main {
+    background-color: #DAD7CD;
+}
+
+.col-xxl-8 {
+    width: 100%;
+    background-color: #DAD7CD;
+}
+
+.btn-bg-dark {
+    background-color: #A3B18A;
+}
+
+.btn-bg-dark:hover {
+    background-color: #344E41;
+}
+
+.btn-bg-light {
+    background-color: #588157;
+}
+
+.btn-bg-light:hover {
+    background-color: #344E41;
+}

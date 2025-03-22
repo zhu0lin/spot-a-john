@@ -1,0 +1,36 @@
+/*Header*/
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-pills a {
+  color: black;
+}
+
+.nav-pills a:hover {
+  color: #A3B18A;
+}
+
+
+/*End headers*/
+
+/*Footer*/
+
+.container-footer {
+    /* position: fixed; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    /* color: white;
+  background-color: #000000; */
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+footer span {
+    justify-content: center;
+}
+
+/*End footers*/
