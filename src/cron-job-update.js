@@ -5,11 +5,11 @@ import supabase from "./supabase-client.js";
 
 const config = {
     headers: {
-        'X-App-Token': process.env['X-App-Token']
+        'X_App_Token': process.env['X_App_Token']
     }
 };
 
-const task = cron.schedule('* * * * */1', async () => { //update database once every day by calling API
+const task = cron.schedule('0 0 * * *', async () => { //update database once every day by calling API
     await updateDatabase();
 }, {
     scheduled: true,
@@ -25,7 +25,7 @@ const updateDatabase = async () => {
         const formattedData = data.map(entry => ({
             facility_name: entry.facility_name,
             location_type: entry.location_type,
-            coordinate: entry.coordinate, //fix this
+            coordinate: `(${entry.longitude}, ${entry.latitude})`, 
             operator: entry.operator,
             status: entry.status,
             hours_of_operation: entry.hours_of_operation,
@@ -34,7 +34,7 @@ const updateDatabase = async () => {
         
         const { error } = await supabase
             .from('api_data') 
-            .upsert(formattedData, { onConflict: ['id'] });
+            .upsert(formattedData, { onConflict: ['facility_name'] });
 
         if (error) throw error;
         console.log(" Database successfully updated");

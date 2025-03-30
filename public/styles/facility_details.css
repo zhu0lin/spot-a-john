@@ -1,0 +1,32 @@
+/*Specific facility details page*/
+
+.facility-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    margin-left: 10%; 
+    width: 80%; 
+}
+
+.details-container {
+    margin-bottom: 20px;
+}
+
+.btn-back {
+    display: block;
+    background-color: #A3B18A; 
+    color: #fff; 
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-back:hover {
+    background-color: #8A9A6D; 
+    transform: scale(1.05);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+}

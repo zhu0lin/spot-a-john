@@ -1,0 +1,20 @@
+<%- include('partials/header.ejs'); -%>
+
+    <div class="facility-details">
+        <div class="details-container">
+            <h2>
+                <%= facility.facility_name %>
+            </h2>
+            <p>Location: <%= facility.location_type || "N/A" %>
+            </p>
+            <p>Description: <%= facility.operator || "Unknown operator" %>
+            </p>
+            <p>Status: <%= facility.status || "Unknown status" %>
+            </p>
+            <p>Hours of operation <%= facility.hours_of_operation || "Unknown hours of operation" %>
+            </p>
+        </div>
+        <a href="/api" class="btn-back">Back to List</a>
+    </div>
+
+    <%- include('partials/footer.ejs'); -%>

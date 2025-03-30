@@ -9,4 +9,28 @@
     </div>
   </section>
 
+  <div class="facility-container">
+    <% facilities.forEach(facility=> { %>
+      <div class="card">
+        <h5 class="card-title">
+          <%= facility.facility_name %>
+        </h5>
+        <p class="card-text">
+          Status: <%= facility.status==="Operational" ? "Operational ✅" : "Not Operational ❌" %>
+        </p>
+        <a href="/api/facility/<%= facility.id %>" class="btn-details">More Details</a>
+      </div>
+      <% }); %>
+  </div>
+
+  <div class="pagination">
+    <% let i = 1 %>
+    <% for (i; i <=totalPages; i++) { %>
+      <a href="/api?page=<%= i %>" class="page-btn <%= i === currentPage ? 'active' : '' %>">
+        <%= i %>
+      </a>
+      <% } %>
+      <a href="/api?page=<%= currentPage+1 %>" class="page-btn"> > </a>
+  </div>
+
   <%- include('partials/footer.ejs'); -%>

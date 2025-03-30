@@ -13,18 +13,30 @@ main {
     background-color: #DAD7CD;
 }
 
-.btn-bg-dark {
-    background-color: #A3B18A;
+.btn-locations {
+    display: inline-block;
+    background-color: #A3B18A; 
+    color: #fff; 
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.btn-bg-dark:hover {
+.btn-locations:hover {
     background-color: #344E41;
 }
 
-.btn-bg-light {
-    background-color: #588157;
+.btn-db {
+    display: inline-block;
+    background-color: #588157; 
+    color: #fff; 
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.btn-bg-light:hover {
+.btn-db:hover {
     background-color: #344E41;
 }
