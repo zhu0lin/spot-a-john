@@ -4,8 +4,9 @@ import path from "path";
 import 'dotenv/config'
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-dotenv.config(); 
+dotenv.config();
 import supabase from "./supabase-client.js";
+import './cron-job-update.js';
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/api", async (req, res) => {
-    
+
     try {
         let { page } = req.query;
         const pageSize = 50;
@@ -38,7 +39,7 @@ app.get("/api", async (req, res) => {
         console.log(`Fetching data for page ${page}, range: ${start} to ${end}`);
 
         const { data, error } = await supabase
-            .from("api_data") 
+            .from("api_data")
             .select("*")
             .range(start, end)
             .order("id", { ascending: true });
@@ -53,7 +54,7 @@ app.get("/api", async (req, res) => {
         res.render("API_johns.ejs", {
             facilities: data,
             currentPage: page,
-            totalPages: 20, 
+            totalPages: 20,
         });
     } catch (error) {
         console.error("Server Error:", error.message);
@@ -65,11 +66,11 @@ app.get('/api/facility/:id', async (req, res) => { // specific facility details
     const facilityID = req.params.id;
 
     try {
-    const { data, error } = await supabase
-            .from('api_data') 
-            .select('*') 
+        const { data, error } = await supabase
+            .from('api_data')
+            .select('*')
             .eq('id', facilityID)
-            .single(); 
+            .single();
 
         if (error) {
             console.error("Supabase error:", error);
@@ -84,6 +85,30 @@ app.get('/api/facility/:id', async (req, res) => { // specific facility details
 
     } catch (error) {
         console.error("Error fetching facility details:", error);
+        res.status(500).send("Server Error");
+    }
+});
+
+app.get('/api/query', async (req, res) => { // search query
+    let { page } = req.query;
+    let query = req.query.query;
+    query = decodeURIComponent(query.replace(/\+/g, ' '));
+    try {
+        const { data, error } = await supabase
+            .from('api_data')
+            .select("*")
+            .eq('facility_name', `${query}`);
+
+        if (error) {
+            console.error("Supabase Error:", error.message);
+            throw error;
+        }
+
+        res.render('API_johns', { facilities: data, currentPage: page,
+            totalPages: 1, });
+    }
+    catch (error) {
+        console.error("Error fetching details for requested search:", error);
         res.status(500).send("Server Error");
     }
 });

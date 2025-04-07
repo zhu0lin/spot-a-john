@@ -1,6 +1,9 @@
 import cron from "node-cron";
 import axios from "axios";
 import supabase from "./supabase-client.js";
+import 'dotenv/config'
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const config = {
@@ -15,6 +18,7 @@ const task = cron.schedule('0 0 * * *', async () => { //update database once eve
     scheduled: true,
     timezone: "America/New_York"
 });
+
 
 
 const updateDatabase = async () => {

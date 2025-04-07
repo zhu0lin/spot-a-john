@@ -9,6 +9,16 @@
     </div>
   </section>
 
+  <div class="search-container">
+    <div class="input-group mb-3">
+      <form action="/api/query" method="GET">
+        <input type="text" name="query" class="form-control" placeholder="Search for location name" aria-label="Recipient's username"
+          aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="search" id="button-addon2">Search</button>
+      </form>
+    </div>
+  </div>
+
   <div class="facility-container">
     <% facilities.forEach(facility=> { %>
       <div class="card">
@@ -21,16 +31,21 @@
         <a href="/api/facility/<%= facility.id %>" class="btn-details">More Details</a>
       </div>
       <% }); %>
+      <% if (facilities.length == 0) { %>
+        <h2 class="no-result-message">No result found, please enter a valid facility</h2>
+      <%}%>
   </div>
 
+
   <div class="pagination">
-    <% let i = 1 %>
-    <% for (i; i <=totalPages; i++) { %>
-      <a href="/api?page=<%= i %>" class="page-btn <%= i === currentPage ? 'active' : '' %>">
-        <%= i %>
-      </a>
-      <% } %>
-      <a href="/api?page=<%= currentPage+1 %>" class="page-btn"> > </a>
+    <% let i=1 %>
+   
+      <% for (i; i <=totalPages; i++) { %>
+        <a href="/api?page=<%= i %>" class="page-btn <%= i === currentPage ? 'active' : '' %>">
+          <%= i %>
+        </a>
+        <% } %>
+          <a href="/api?page=<%= currentPage+1 %>" class="page-btn"> > </a>
   </div>
 
   <%- include('partials/footer.ejs'); -%>

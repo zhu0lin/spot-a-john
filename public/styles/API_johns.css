@@ -1,5 +1,36 @@
 /*API_johns page*/
 
+.search-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; 
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    margin-right: 0.5rem; 
+  }
+  
+  button {
+    white-space: nowrap; 
+    
+  }
+  
+
+  .no-result-message {
+    grid-column: span 5;  
+    text-align: center;   
+    margin-top: 2rem;    
+  }
+  
+
 .facility-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr); 
