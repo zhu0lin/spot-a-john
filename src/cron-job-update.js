@@ -11,15 +11,23 @@ const config = {
         'X_App_Token': process.env['X_App_Token']
     }
 };
+console.log("cron-job-update.js loaded");
 
-const task = cron.schedule('0 0 * * *', async () => { //update database once every day by calling API
-    await updateDatabase();
-}, {
-    scheduled: true,
-    timezone: "America/New_York"
-});
+// const task = cron.schedule('* * * * *', async () => { //update database once every day by calling API
+//     try {
+//         console.log("Attempting to update DB")
+//         await updateDatabase();
+//     }
+//     catch (err) {
+//         console.log(err)
+//     }
+// }, {
+//     scheduled: true,
+//     timezone: "America/New_York"
+// });
 
-
+// console.log("Cron task scheduled:", task.getStatus?.() ?? "Unknown");
+// task.start();
 
 const updateDatabase = async () => {
     try {
@@ -29,15 +37,15 @@ const updateDatabase = async () => {
         const formattedData = data.map(entry => ({
             facility_name: entry.facility_name,
             location_type: entry.location_type,
-            coordinate: `(${entry.longitude}, ${entry.latitude})`, 
+            coordinate: `(${entry.longitude}, ${entry.latitude})`,
             operator: entry.operator,
             status: entry.status,
             hours_of_operation: entry.hours_of_operation,
             last_updated: new Date().toISOString()
         }));
-        
+
         const { error } = await supabase
-            .from('api_data') 
+            .from('api_data')
             .upsert(formattedData, { onConflict: ['facility_name'] });
 
         if (error) throw error;

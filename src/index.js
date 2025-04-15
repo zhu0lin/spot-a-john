@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 dotenv.config();
 import supabase from "./supabase-client.js";
-import './cron-job-update.js';
+
 
 const app = express();
 
