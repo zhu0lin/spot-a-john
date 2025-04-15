@@ -91,13 +91,20 @@ app.get('/api/facility/:id', async (req, res) => { // specific facility details
 
 app.get('/api/query', async (req, res) => { // search query
     let { page } = req.query;
+    const pageSize = 50;
+    page = parseInt(page) || 1;
+
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize - 1;
     let query = req.query.query;
     query = decodeURIComponent(query.replace(/\+/g, ' '));
     try {
         const { data, error } = await supabase
             .from('api_data')
             .select("*")
-            .eq('facility_name', `${query}`);
+            .range(start, end)
+            .ilike('facility_name', `%${query}%`);
+        console.log(data)
 
         if (error) {
             console.error("Supabase Error:", error.message);
@@ -105,7 +112,7 @@ app.get('/api/query', async (req, res) => { // search query
         }
 
         res.render('API_johns', { facilities: data, currentPage: page,
-            totalPages: 1, });
+            totalPages: 20, });
     }
     catch (error) {
         console.error("Error fetching details for requested search:", error);
