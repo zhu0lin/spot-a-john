@@ -8,14 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/api/update-database",
-      "dest": "/src/api/update-database.js"
-    }
-  ],
-  "crons": [
-    {
-      "path": "/api/update-database",
-      "schedule": "0 9 1 * *"
+      "src": "/(.*)",
+      "dest": "/src/index.js"
     }
   ]
 }
