@@ -1,4 +1,5 @@
 # Spot a John 🚽
+## Currently learning React to refactor frontend 
 
 Have you ever found yourself in the city without a bathroom? It happens to all of us at some point or another. Unfortunately, it's not so easy to find a quick and accessible bathroom nearby without a hassle most of the time. Spot a John finds bathrooms near you, offering information like hours of operation, who operates it and other important details. 
 
